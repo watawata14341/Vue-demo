@@ -9,11 +9,15 @@
   <body>
     <script src="vue.js"></script>
     <div id="app">
-      <p>{{message}}</p>
+      <p v-once>{{message}}</p>
       <p>{{number + 3}}</p>
       <p>{{ok ? "Yes" : "No"}}</p>
       <p>{{sayHi()}}</p>
+      <p v-text="message"></p>
       <button v-on:click="reverseMessage">メッセージ反転</button>
+      <div v-html="html"></div>
+      <a :[attribute]="url">Google</a>
+      <a v-bind="twitterObject">Twitter</a>
     </div>
   </body>
   <script>
@@ -23,13 +27,21 @@
         message: "HelloWorld!",
         number: 3,
         ok: false,
+        html: "<h1>h1です</h1>",
+        url:"https://google.com",
+        attribute:'href',
+        twitterObject: {
+            href: 'https://twitter.com',
+            id: 31,
+        },
       },
       methods: {
         reverseMessage: function () {
           this.message = this.message.split("").reverse().join("");
         },
         sayHi: function () {
-            return 'Hi';
+            this.message = "HelloVueJS";
+            return this.message;
         }
       },
     });
