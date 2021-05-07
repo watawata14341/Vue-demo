@@ -1,0 +1,42 @@
+<head>
+    <style>
+        .red {
+            color: red;
+        }
+        .bg-blue {
+            background-color: blue;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1 :class="classObject">Hello</h1>
+        <button @click="isActive = !isActive">切り替え</button>
+        <h1 :class="[{red: isActive},bg]">good</h1>
+        <h1 :style="styleObject">morning</h1>
+    </div>
+</body>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            isActive: true,
+            color: 'red',
+            bg: 'bg-blue',
+            styleObject: {
+                color: 'red', 
+                'background-color': 'blue'
+            }
+        },
+        computed: {
+            classObject: function(){
+                return {
+                    red: this.isActive,
+                    'bg-blue': !this.isActive
+                }
+            }
+        }
+    })
+</script>
