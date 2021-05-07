@@ -1,0 +1,67 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
+<div id="app">
+    <p>現在{{ number }}回クリックされています</p>
+    <button v-on:[event]="CountUP">カウントアップ</button>
+    <button @click="CountUP">カウントアップ</button>
+    <p v-on:mousemove="getMouseXY(10, $event)">マウスを乗せてください
+        <span v-on:mousemove.stop="">反応しないゾーン</span>
+    </p>
+    <p>X:{{ x }},Y:{{ y }}</p>
+    <a v-on:click.prevent href="https://google.com">Google</a><br>
+
+    <!-- key修飾詞 -->
+    <input type="text" v-on:keyup.space.enter="myAlert"><br>
+
+    <!-- v-model -->
+    <input type="text" v-model="message">
+    <a>{{ message }}</a>
+
+    <p>{{ counter }}</p>
+    <button @click="counter += 1">+1</button>
+    <p>{{ LessThanThree }}</p>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            number: 0,
+            event: 'click',
+            x: 0,
+            y: 0,
+            message: "こんにちは",
+            counter: 0,
+        },
+        methods: {
+            CountUP: function(){
+                this.number++;
+            },
+            getMouseXY: function(divide, event){
+                this.x = event.clientX / divide;
+                this.y = event.clientY / divide;
+            },
+            noEvent: function(event){
+                // event.stopPropagation()
+                event.preventDefault();
+            },
+            myAlert(){
+                alert('アラート');
+            }
+        },
+        // methodsでも書けるが関係のないものにも反応してしまう -> computed
+        computed: {
+            LessThanThree: function(){
+                return this.counter > 3 ? '3より上' : '3以下';
+            }
+        },
+        watch: {
+            counter: function(){
+                var vm = this;
+                setTimeout(function(){
+                    vm.counter = 0;
+                }, 3000)
+            }
+        }
+    })
+</script>
