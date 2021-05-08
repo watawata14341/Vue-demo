@@ -1,0 +1,32 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
+<div id="app">
+    <p v-if="OK">OK!</p>
+    <p v-else-if="maybeOK">maybe OK</p>
+    <p v-else>Not OK...</p>
+    <ul>
+        <li v-for="(fruit, index) in fruits">({{index}}){{fruit}}</li>
+    </ul>
+    <ul>
+        <template v-for="(value, key, index) in Objects">
+            <li >({{index}}){{key}}:{{value}}</li>
+            <hr>
+        </template>
+    </ul>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            OK: false,
+            maybeOK: true,
+            fruits: ['りんご', 'バナナ', 'マンゴー'],
+            Objects: {
+                firstName: '太郎',
+                lastName: '綿貫',
+                age: 21,
+            }
+        }
+    })
+</script>
