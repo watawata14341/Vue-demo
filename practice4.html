@@ -1,0 +1,30 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
+<div id="app">
+    <p>{{message}}</p>
+    <p>{{name}}</p>
+    <p>{{myData}}</p>
+    <hello></hello>
+</div>
+
+<script>
+    var data = {
+        message: "あいうえお",
+        name: "太郎"
+    }
+
+    Vue.component('hello', {
+        template: '<p>こんにちは</p>'
+    });
+
+    var vm = new Vue({
+        data: data,
+        computed: {
+            myData: function(){
+                return this.$data;
+            }
+        }
+    })
+
+    vm.$mount("#app")
+</script>
